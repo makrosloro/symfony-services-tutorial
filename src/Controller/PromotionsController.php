@@ -41,19 +41,9 @@ class PromotionsController extends AbstractController
         $lowestPriceEnquiry->setPromotionId(3);
         $lowestPriceEnquiry->setPromotionName('Black Friday half price sale');
 
-        return new JsonResponse($lowestPriceEnquiry, 200);
+        $responseContent = $serializer->serialize($lowestPriceEnquiry, 'json');
 
-        /*return new JsonResponse([
-            'quantity' => 5,
-            'request_location' => 'UK',
-            'voucher_code' => 'OU812',
-            'request_date' => '2022-04-04',
-            'product_id' => $id,
-            'price' => 100,
-            'discounted_price' => 50,
-            'promotion_id' => 3,
-            'promotion_name' => ''
-        ], 200);*/
+        return new Response($responseContent, Response::HTTP_OK);
     }
 
     #[Route('/products/{id}/promotions', name: 'promotions', methods: 'GET')]
