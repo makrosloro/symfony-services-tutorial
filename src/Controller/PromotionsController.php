@@ -56,11 +56,11 @@ class PromotionsController extends AbstractController
         );
 
 
-        $modifiedEnquiry = $promotionsFilter->apply($lowestPriceEnquiry, $promotions);
+        $modifiedEnquiry = $promotionsFilter->apply($lowestPriceEnquiry, ...$promotions);
 
         $responseContent = $serializer->serialize($modifiedEnquiry, 'json');
 
-        return new Response($responseContent, Response::HTTP_OK);
+        return new Response($responseContent, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
     #[Route('/products/{id}/promotions', name: 'promotions', methods: 'GET')]
