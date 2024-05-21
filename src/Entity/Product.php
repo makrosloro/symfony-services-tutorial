@@ -21,8 +21,8 @@ class Product
     /**
      * @var Collection<int, ProductPromotion>
      */
-    #[ORM\OneToMany(targetEntity: ProductPromotion::class, mappedBy: 'product')]
-    private Collection $productPromotions;
+//    #[ORM\OneToMany(targetEntity: ProductPromotion::class, mappedBy: 'product')]
+//    private Collection $productPromotions;
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ class Product
     /**
      * @return Collection<int, ProductPromotion>
      */
-    public function getProductPromotions(): Collection
+    /*public function getProductPromotions(): Collection
     {
         return $this->productPromotions;
     }
@@ -74,5 +74,5 @@ class Product
         }
 
         return $this;
-    }
+    }*/
 }
