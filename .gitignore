@@ -177,3 +177,4 @@ fabric.properties
 
 mysql/*
 .env
+/.phpunit.result.cache
