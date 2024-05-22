@@ -23,6 +23,7 @@ class LowestPriceFilterTest extends ServiceTestCase
         $enquiry->setQuantity(5);
 
         $promotions = $this->promotionsDataProvider();
+
         $lowestPriceFilter = $this->container->get(LowestPriceFilter::class);
 
         //-- When
