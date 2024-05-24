@@ -8,15 +8,15 @@ use App\Entity\Promotion;
 class FixedPriceVoucher implements PriceModifierInterface
 {
 
-    public function modify(int $price, int $quantity, Promotion $promotion, PromotionEnquiryInterface $enquiry): int
+    public function modify(Promotion $promotion, PromotionEnquiryInterface $enquiry): int
     {
         $voucherCode = $enquiry->getVoucherCode();
         $promotionVoucherCode = $promotion->getCriteria()['code'];
 
         if (!($voucherCode === $promotionVoucherCode)) {
-            return $price * $quantity;
+            return $enquiry->getPrice() * $enquiry->getQuantity();
         }
 
-        return $promotion->getAdjustment() * $quantity;
+        return $promotion->getAdjustment() * $enquiry->getQuantity();
     }
 }
