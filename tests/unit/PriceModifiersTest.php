@@ -69,8 +69,8 @@ class PriceModifiersTest extends ServiceTestCase
         $enquiry->setPrice(100);
 
         $promotion = new Promotion();
-        $promotion->setName('Buy one get one half price');
-        $promotion->setAdjustment(0.75);
+        $promotion->setName('Buy one get one free');
+        $promotion->setAdjustment(0.5);
         $promotion->setCriteria(['minimun_quantity' => 2]);
         $promotion->setType('even_items_multiplier');
 
@@ -80,6 +80,29 @@ class PriceModifiersTest extends ServiceTestCase
         $modifiedPrice = $evenItemsMultiplier->modify($promotion, $enquiry);
 
         //-- Then
-        $this->assertEquals(400, $modifiedPrice);
+        $this->assertEquals(300, $modifiedPrice);
+    }
+
+    /** @test */
+    public function even_items_multiplier_correctly_calculates_alternatives(): void
+    {
+        //-- Given
+        $enquiry = new LowestPriceEnquiry();
+        $enquiry->setQuantity(5);
+        $enquiry->setPrice(100);
+
+        $promotion = new Promotion();
+        $promotion->setName('Buy one get one half price');
+        $promotion->setAdjustment(0.5);
+        $promotion->setCriteria(['minimun_quantity' => 2]);
+        $promotion->setType('even_items_multiplier');
+
+        $evenItemsMultiplier = new EvenItemsMultiplier();
+
+        //-- When
+        $modifiedPrice = $evenItemsMultiplier->modify($promotion, $enquiry);
+
+        //-- Then
+        $this->assertEquals(300, $modifiedPrice);
     }
 }
