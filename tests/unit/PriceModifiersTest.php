@@ -69,7 +69,7 @@ class PriceModifiersTest extends ServiceTestCase
         $enquiry->setPrice(100);
 
         $promotion = new Promotion();
-        $promotion->setName('Buy one get one free');
+        $promotion->setName('Buy one get one half price');
         $promotion->setAdjustment(0.75);
         $promotion->setCriteria(['minimun_quantity' => 2]);
         $promotion->setType('even_items_multiplier');
