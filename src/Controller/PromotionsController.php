@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 
+use App\Cache\PromotionCache;
 use App\DTO\LowestPriceEnquiry;
-use App\Entity\Promotion;
 use App\Filter\PromotionsFilterInterface;
 use App\Repository\ProductRepository;
 use App\Service\Serializer\DTOSerializer;
@@ -30,7 +30,8 @@ class PromotionsController extends AbstractController
         Request                   $request,
         int                       $id,
         DTOSerializer             $serializer,
-        PromotionsFilterInterface $promotionsFilter
+        PromotionsFilterInterface $promotionsFilter,
+        PromotionCache $promotionCache,
     ): Response
     {
         if ($request->headers->has('force_fail')) {
@@ -50,11 +51,7 @@ class PromotionsController extends AbstractController
         $product = $this->repository->find($id); //ToDo: Add error handling for not found product
         $lowestPriceEnquiry->setProduct($product);
 
-        $promotions = $this->entityManager->getRepository(Promotion::class)->findValidForProduct(
-            $product,
-            date_create_immutable($lowestPriceEnquiry->getRequestDate())
-        ); //ToDo: Add error handling for not found promotions
-
+        $promotions = $promotionCache->findValidForProduct($product, $lowestPriceEnquiry->getRequestDate());
 
         $modifiedEnquiry = $promotionsFilter->apply($lowestPriceEnquiry, ...$promotions);
 
