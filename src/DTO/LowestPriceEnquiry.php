@@ -5,7 +5,7 @@ namespace App\DTO;
 use App\Entity\Product;
 use Symfony\Component\Serializer\Attribute\Ignore;
 
-class LowestPriceEnquiry implements PromotionEnquiryInterface
+class LowestPriceEnquiry implements PriceEnquiryInterface
 {
     #[Ignore]
     private ?Product $product;
