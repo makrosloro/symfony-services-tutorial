@@ -12,18 +12,9 @@ class ExceptionListener
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+        $exceptionData = $exception->getExceptionData();
 
-        $response = new JsonResponse([
-            'type' => 'ConstrantException',
-            'title' => 'Exception',
-            'description' => $exception->getMessage(),
-            'violations' => [
-                [
-                    'propertyPath' => 'quantity',
-                    'message' => 'Quantity must be greater than 0.',
-                ],
-            ]
-        ]);
+        $response = new JsonResponse($exceptionData->toArray());
 
         if ($exception instanceof HttpExceptionInterface) {
             $response->setStatusCode($exception->getStatusCode());
