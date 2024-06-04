@@ -25,7 +25,7 @@ class DtoSubscriberTest extends ServiceTestCase
         $dispatcher = $this->container->get(EventDispatcherInterface::class);
 
         $this->expectException(ServiceException::class);
-        $this->expectExceptionMessage('Validation failed');
+        $this->expectExceptionMessage('ConstraintViolation');
 
         $dispatcher->dispatch($event, $event::NAME);
 
