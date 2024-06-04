@@ -48,7 +48,7 @@ class PromotionsController extends AbstractController
             'json'
         );
 
-        $product = $this->repository->find($id); //ToDo: Add error handling for not found product
+        $product = $this->repository->findOrFail($id);
         $lowestPriceEnquiry->setProduct($product);
 
         $promotions = $promotionCache->findValidForProduct($product, $lowestPriceEnquiry->getRequestDate());
