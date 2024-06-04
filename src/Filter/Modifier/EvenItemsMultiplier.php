@@ -17,7 +17,6 @@ class EvenItemsMultiplier implements PriceModifierInterface
         }
 
         $oddCount = $enquiry->getQuantity() % 2;
-
         $evenCount = $enquiry->getQuantity() - $oddCount;
 
         return (($evenCount * $enquiry->getPrice()) * $promotion->getAdjustment()) + ($oddCount * $enquiry->getPrice());

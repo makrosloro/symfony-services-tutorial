@@ -43,8 +43,6 @@ class DTOSerializer implements SerializerInterface
 
         $this->eventDispatcher->dispatch($event, $event::NAME);
 
-        //-- Dispatch an after dto created event
-            //-- Listeners
         return $dto;
     }
 }
