@@ -105,4 +105,7 @@ Tests has been created for unit testing.
 ````
 
 ### Aditional notes
+Remember to set your `.env` file on project root directory 
+and check of your project caché is correctly configured for working with redis.
+
 If you have any doubts, please contact me. Thank you!
