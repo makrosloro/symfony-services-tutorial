@@ -103,3 +103,6 @@ Tests has been created for unit testing.
 > vendor/bin/phpunit tests/
 
 ````
+
+### Aditional notes
+If you have any doubts, please contact me. Thank you!
